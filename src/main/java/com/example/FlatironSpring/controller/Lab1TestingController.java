@@ -1,10 +1,10 @@
-package com.example.FlatironSpring;
+package com.example.FlatironSpring.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LabTestingController {
+public class Lab1TestingController {
 
     @GetMapping("/reverse")
     public String reverse(String stringToReverse) {
