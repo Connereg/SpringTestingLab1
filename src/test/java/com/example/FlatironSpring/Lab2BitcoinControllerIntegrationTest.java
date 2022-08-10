@@ -2,6 +2,7 @@ package com.example.FlatironSpring;
 
 import com.example.FlatironSpring.controller.CryptoController;
 import com.example.FlatironSpring.controller.Lab2BitcoinController;
+import com.example.FlatironSpring.dto.CoinDTO;
 import com.example.FlatironSpring.service.CryptoService;
 import com.example.FlatironSpring.service.Lab2BitcoinService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -30,7 +32,12 @@ class Lab2BitcoinControllerIntegrationTest {
     @WithMockUser(username = "fakeUser")
     @Test
     void checkGetBitcoinInfo() throws Exception {
-        mockMvc.perform(get("/bitcoinPrice"))
+        // MUST GENERATE FAKED DATA BEFORE MOCKITO CHAIN
+        CoinDTO fakeBitcoin = new CoinDTO();
+        fakeBitcoin.setPriceUsd("100");
+        when(bitcoinService.getBitcoin()).thenReturn(fakeBitcoin);
+
+        mockMvc.perform(get("/bitcoin"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("The current price of a Bitcoin is: ")));

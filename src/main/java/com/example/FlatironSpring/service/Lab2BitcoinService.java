@@ -11,7 +11,7 @@ import static java.lang.Double.parseDouble;
 public class Lab2BitcoinService {
 
     public CoinDTO getBitcoin() {
-        String apiURL = "http://api.coincap.io/v2/assets/bitcoin";
+        String apiURL = "https://api.coincap.io/v2/assets/bitcoin";
         RestTemplate restTemplate = new RestTemplate();
         DataDTO dtoReturn = restTemplate.getForObject(apiURL, DataDTO.class);
         CoinDTO coinReturn = dtoReturn.getData();

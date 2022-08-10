@@ -14,7 +14,7 @@ public class Lab2BitcoinController {
         this.bitcoinService = bitcoinService;
     }
 
-    @GetMapping("/bitcoinPrice")
+    @GetMapping("/bitcoin")
     public String checkBitcoinPrice() {
         String bitcoinStatement = "The current price of a Bitcoin is: ";
         CoinDTO bitcoin = bitcoinService.getBitcoin();
