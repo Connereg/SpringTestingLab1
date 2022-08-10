@@ -1,10 +1,13 @@
 package com.example.FlatironSpring;
 
+import com.example.FlatironSpring.controller.CryptoController;
 import com.example.FlatironSpring.controller.Lab2BitcoinController;
+import com.example.FlatironSpring.service.CryptoService;
 import com.example.FlatironSpring.service.Lab2BitcoinService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.junit.jupiter.api.Test;
 
@@ -23,18 +26,11 @@ class Lab2BitcoinControllerIntegrationTest {
     @MockBean
     private Lab2BitcoinService bitcoinService;
 
+
+    @WithMockUser(username = "fakeUser")
     @Test
-    void checkBitcoinPriceDefault() throws Exception {
+    void checkGetBitcoinInfo() throws Exception {
         mockMvc.perform(get("/bitcoinPrice"))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string(containsString("NA")));
-    }
-
-
-    @Test
-    void checkBitcoinPrice() throws Exception {
-        mockMvc.perform(get("/crypto"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("The current price of a Bitcoin is: ")));

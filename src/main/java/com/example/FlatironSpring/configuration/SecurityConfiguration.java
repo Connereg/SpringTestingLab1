@@ -23,11 +23,11 @@ import java.security.cert.Extension;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/crypto");
+                .antMatchers("/crypto").permitAll();
+
 
         http.authorizeRequests()
                 .anyRequest()
