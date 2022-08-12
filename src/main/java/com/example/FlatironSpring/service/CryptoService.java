@@ -16,10 +16,14 @@ import static java.lang.Double.parseDouble;
 public class CryptoService {
 
     public CoinDTO getCrypto(String cryptoName) {
+        log.trace("Starting GetCrypto Method");
+        log.info("Targeting Coin Api with endpoint " + cryptoName);
         String apiURL = "https://api.coincap.io/v2/assets/" + cryptoName;
         log.debug("Trying to access API with " + apiURL);
         RestTemplate restTemplate = new RestTemplate();
         DataDTO dataDTOReturn = restTemplate.getForObject(apiURL, DataDTO.class);
+        log.info("Generated Data DTO from API request");
+        log.trace("Exiting GetCrypto Method");
         return dataDTOReturn.getData();
     }
 
